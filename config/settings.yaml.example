@@ -1,0 +1,6 @@
+
+development:
+  secret: "some-secret-we-can-use-for-generating-app-sessions"
+  port: 3000
+  db:
+    uri: "mongodb://localhost/cb2013_development"
