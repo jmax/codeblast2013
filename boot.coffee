@@ -26,6 +26,7 @@ settings = (express, app) ->
       res.locals.token = req.session._csrf
       next()
 
+    app.use require('connect-assets')()
     app.use app.router
     app.use express.static('public')
 
