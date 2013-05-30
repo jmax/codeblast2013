@@ -6,7 +6,9 @@ settings = (express, app) ->
   SessionStore = require("session-mongoose")(express)
 
   app.configure () ->
-    app.set 'port', config.port
+    app.set 'views',        __dirname + '/views'
+    app.set 'view engine', 'jade'
+    app.set 'port',        config.port
 
     app.use express.bodyParser()
     app.use express.methodOverride()

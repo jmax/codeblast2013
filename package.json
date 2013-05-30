@@ -7,6 +7,7 @@
     "express": "3.2.5",
     "coffee-script": "~1.6.2",
     "yaml-config": "~0.2.1",
-    "session-mongoose": "~0.2.2"
+    "session-mongoose": "~0.2.2",
+    "jade": "~0.31.0"
   }
 }
