@@ -18,6 +18,11 @@ settings = (express, app) ->
         interval: 120000
       )
     )
+    app.use express.csrf()
+
+    app.use (req, res, next) ->
+      res.locals.token = req.session._csrf
+      next()
 
     app.use app.router
     app.use express.static('public')
