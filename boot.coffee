@@ -1,9 +1,12 @@
 
-config = require('./config/load')
+config   = require('./config/load')
+mongoose = require('mongoose')
 
 settings = (express, app) ->
 
+  database     = process.env.MONGOHQ_URL || config.db.uri
   SessionStore = require("session-mongoose")(express)
+  global.db    = mongoose.createConnection(database)
 
   app.configure () ->
     app.set 'views',        __dirname + '/views'
@@ -16,7 +19,7 @@ settings = (express, app) ->
     app.use express.session(
       secret: config.secret,
       store: new SessionStore(
-        url: process.env.MONGOHQ_URL || config.db.uri,
+        url: database,
         interval: 120000
       )
     )
