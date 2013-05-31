@@ -15,10 +15,13 @@ html
 
     title CodeBlast 2013 - Demo App
 
+    != css('normalize')
+    != css('foundation.min')
     != css('application')
 
   body
 
-    block content
+    div(class='container')
+      block content
 
     != js('application')

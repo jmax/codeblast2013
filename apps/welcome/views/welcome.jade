@@ -2,4 +2,29 @@
 extends ../../../views/layout
 
 block content
-  h2 Hello World!
+  div.row
+    header(class='large12 columns')
+      h2 Contacts
+
+      nav
+        ul.breadcrumbs
+          li
+            a(class="refreshButton", href="#") Refresh
+
+    section#contacts(class='large12 columns')
+
+  template#contact
+    article(id="{{_id}}")
+      h2
+        | {{lastName}}, {{ firstName }} 
+        small {{age}} 
+        small {{email}}
+      ul(class='phones inline-list')
+        | {{#phones}}
+        li.phone
+          span {{type}} / {{number}}
+        | {{/phones}}
+
+  template#alphaFilter
+    li
+      a(class="filterButton", href="/contacts/{{letter}}") {{letter}}

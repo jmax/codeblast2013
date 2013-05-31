@@ -8,6 +8,7 @@ PhoneSchema = Schema
 ContactSchema = Schema
   firstName: String,
   lastName: String,
+  email: String,
   age: Number,
   phones: [PhoneSchema]
 
