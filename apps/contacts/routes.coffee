@@ -14,3 +14,7 @@ exports.withPhones = (req, res, next) ->
 exports.alphabetically = (req, res, next) ->
   Contact.findInDirectory req.params.letter, (err, contacts) ->
     respond_with(res, err, contacts)
+
+exports.search = (req, res, next) ->
+  Contact.searchByName req.params.key, (err, contacts) ->
+    respond_with(res, err, contacts)

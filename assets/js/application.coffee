@@ -2,6 +2,11 @@
 #= require vendor/jquery-2.0.1.min.js
 #= require vendor/mustache.js
 #= require vendor/underscore-min.js
+#= require vendor/bootstrap.min.js
+
+cleanUpSelection = () ->
+  $('.searchBox').val("")
+  $('.active').removeClass('active')
 
 renderContacts = (contacts) ->
   contactTemplate = $('#contact').html()
@@ -14,7 +19,9 @@ updateContacts = (targetURL) ->
   $('#contacts').html("")
   $.getJSON targetURL, (data) -> renderContacts(data)
 
-loadContactsList = () -> updateContacts('/contacts')
+loadContactsList = () ->
+  cleanUpSelection()
+  updateContacts('/contacts')
 
 loadAlphaFilters = () ->
   filterTemplate = $('#alphaFilter').html()
@@ -22,7 +29,7 @@ loadAlphaFilters = () ->
   alphabeth = _.toArray('ABCDEFGHIJKLMNOPQRSTUVWXYZ').reverse()
   _.each alphabeth, (letter) ->
     output = Mustache.render(filterTemplate, { letter: letter })
-    $('.breadcrumbs').prepend(output)
+    $('.breadcrumb').prepend(output)
 
 jQuery ->
 
@@ -35,4 +42,11 @@ jQuery ->
 
   $('.filterButton').on 'click', (e) ->
     e.preventDefault()
+    cleanUpSelection()
+    $(this).parent().addClass('active')
     updateContacts($(this).attr('href'))
+
+  $('.searchBox').on 'keypress', (e) ->
+    if e.which == 13
+      $('.active').removeClass('active')
+      updateContacts("/search/#{$(this).val()}")

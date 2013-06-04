@@ -3,15 +3,26 @@ extends ../../../views/layout
 
 block content
   div.row
-    header(class='large12 columns')
-      h2 Contacts
-
+    div(class="page-header span12")
+      h1 Contacts
+  div.row
+    div.span4
+      ul(class="nav nav-list")
+        li.nav-header Search
+        li
+          input(type="text", class="searchBox search-query", placeholder="Type some name a hit enter...")
+        li(class="nav-header") Filters
+        li.active
+          a(class="filterButton", href="/contacts") All
+        li
+          a(class="filterButton", href="/contacts/with-phones") With Phones
+    div.span8
       nav
-        ul.breadcrumbs
+        ul.breadcrumb
           li
             a(class="refreshButton", href="#") Refresh
 
-    section#contacts(class='large12 columns')
+      section#contacts(class='large12 columns')
 
   template#contact
     article(id="{{_id}}")
@@ -19,12 +30,14 @@ block content
         | {{lastName}}, {{ firstName }} 
         small {{age}} 
         small {{email}}
-      ul(class='phones inline-list')
+      div(class='phones inline-list')
         | {{#phones}}
-        li.phone
-          span {{type}} / {{number}}
+        span(class='label label-info') {{type}}
+        span(class='label') {{number}}
+        | 
         | {{/phones}}
 
   template#alphaFilter
     li
       a(class="filterButton", href="/contacts/{{letter}}") {{letter}}
+      span.divider /
